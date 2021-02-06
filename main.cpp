@@ -79,7 +79,7 @@ struct ChannelStrip
 
     void func()
     {
-    std::cout << "Number of channels: " << this->addChannel(2) << std::endl;
+        std::cout << "Number of channels: " << this->addChannel(4) << " Number of inputs: " << this->numInputs << std::endl;
     }
 
     void makeAdjustments(float volume, float panning, bool mute);
@@ -153,7 +153,7 @@ struct Equalizer
 
     void func()
     {
-        std::cout << "Number of bands: " << this->addBand() << std::endl;
+        std::cout << "Number of bands: " << this->addBand() << " Max Freq Range: " << this->maxFreqRange << std::endl;
     }
 
     double boostBass(float level, float freqRange);
@@ -228,7 +228,7 @@ struct Preamp
 
     void func()
     {
-        std::cout << "How much mid reduction: " << this->cutMud(6.0f) << std::endl;
+        std::cout << "How much mid reduction: " << this->cutMud(12.0f) << " Gain increase: " <<  this->gainIncrease << std::endl;
     }
 
     float boostAmp(float level);
@@ -384,9 +384,7 @@ int main()
 
     std::cout << "Should I turn it down? " << (channel.numInputs == 1 ? "No" : "Yes") << "\n";
 
-    auto chanCount = channel.addChannel(4);
-
-    std::cout << "Number of channels: " << chanCount << std::endl;
+    std::cout << "Number of channels: " << channel.addChannel(4) << " Number of inputs: " << channel.numInputs << std::endl;
 
     channel.func();
 
@@ -394,9 +392,7 @@ int main()
 
     Equalizer eq;
 
-    auto bands = eq.addBand();
-
-    std::cout << "Number of bands: " << bands << std::endl;
+    std::cout << "Number of bands: " << eq.addBand() << " Max Freq Range: " << eq.maxFreqRange << std::endl;
 
     eq.func();
 
@@ -404,9 +400,7 @@ int main()
 
     Preamp pre;
 
-    auto cut = pre.cutMud(12.0f);
-
-    std::cout << "How much mid reduction: " << cut << std::endl;
+    std::cout << "How much mid reduction: " << pre.cutMud(12.0f) << " Gain increase: " << pre.gainIncrease << std::endl;
 
     pre.func();
 
