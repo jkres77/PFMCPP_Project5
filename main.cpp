@@ -77,6 +77,11 @@ struct ChannelStrip
     ChannelStrip();
     ~ChannelStrip();
 
+    void func()
+    {
+        std::cout << "Number of channels: " << this->addChannel(4) << " Number of inputs: " << this->numInputs << std::endl;
+    }
+
     void makeAdjustments(float volume, float panning, bool mute);
     void acceptMicInput(bool isConnected);
     void acceptAudioInput(bool isConnected, bool isMono);
@@ -145,6 +150,11 @@ struct Equalizer
 
     Equalizer();
     ~Equalizer();
+
+    void func()
+    {
+        std::cout << "Number of bands: " << this->addBand() << " Max Freq Range: " << this->maxFreqRange << std::endl;
+    }
 
     double boostBass(float level, float freqRange);
     double cutHiFreq(float amountToCut, float freqRange);
@@ -215,6 +225,11 @@ struct Preamp
 
     Preamp();
     ~Preamp();
+
+    void func()
+    {
+        std::cout << "How much mid reduction: " << this->cutMud(12.0f) << " Gain increase: " <<  this->gainIncrease << std::endl;
+    }
 
     float boostAmp(float level);
     float trimAmp(float level);
@@ -360,8 +375,8 @@ FxModule::~FxModule()
 #include <iostream>
 int main()
 {
-    Example::main();
-    return 0;
+    // Example::main();
+    // return 0;
     
     ChannelStrip channel;
     channel.acceptAudioInput(true, false);
@@ -369,25 +384,25 @@ int main()
 
     std::cout << "Should I turn it down? " << (channel.numInputs == 1 ? "No" : "Yes") << "\n";
 
-    auto chanCount = channel.addChannel(4);
+    std::cout << "Number of channels: " << channel.addChannel(4) << " Number of inputs: " << channel.numInputs << std::endl;
 
-    std::cout << "Number of channels: " << chanCount << std::endl;
+    channel.func();
 
     //=========================================================
 
     Equalizer eq;
 
-    auto bands = eq.addBand();
+    std::cout << "Number of bands: " << eq.addBand() << " Max Freq Range: " << eq.maxFreqRange << std::endl;
 
-    std::cout << "Number of bands: " << bands << std::endl;
+    eq.func();
 
     //=========================================================
 
     Preamp pre;
 
-    auto cut = pre.cutMud(10.0f);
+    std::cout << "How much mid reduction: " << pre.cutMud(12.0f) << " Gain increase: " << pre.gainIncrease << std::endl;
 
-    std::cout << "How much mid reduction: " << cut << std::endl;
+    pre.func();
 
     //========================================================
 
